@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="RubyLineApp">
+<head>
+  <title>Ruby Line App</title>
+  <link rel="stylesheet" type="text/css" href="rubyline.css">
+</head>
+<body>
+  <div class="container">
+    <div class="rubyline-header">
+      <h1 class="header">RUBYLINE</h1>
+    </div>
+    <div class="column-left" ng-controller="fareEstimator">
+        <div class="form">
+          <div class="form-title">Where do you want to go?</div>
+          <div class="form-info">
+           <input type="textbox" id="start" placeholder="starting location" value="1815 M St NW, Washington, DC "/>
+           <input type="text" id="end" placeholder="ending location" value=""/>
+            <div class="people">
+             <select>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+               <option>7</option>
+               <option>8</option>
+               <option>9</option>
+               <option>10</option>
+             </select>
+             <span>people</span>
+            </div>
+            <button class="submit" ng-click="codeAddress()">Go!</button>
+          </div>
+        </div>
+      <div id="google-map" >
+      </div>
+      <div class="uber-data">
+         <img src="assets/uber-logo.png" class="uber"/> <span>$26.35</span>
+      </div>
+      <div class="metro-data">
+        <img src="assets/wmata-logo.png" class="wmata"/> <span> $14.60</span>
+      </div>
+    </div>
+
+    <div class="column-right" ng-controller="nearestStation">
+      <div class="big-title">
+        <span><img src="assets/wmata-logo.png" class="wmata"/></span>
+        <div class="metro-title">
+          Nearest Stations</div>
+      </div>
+      <div class="metro-data">
+        <div class="station-name" ng-repeat="metros in metrostation" ng-bind="metros.name">  </div>
+        <div class="line-info" >
+          <div class="destination" ng-class="{{metros.line}}">
+            {{metros.line}} - {{metros.destination}}
+          </div>
+          <div class="time">{{metros.minutes}} </div>
+        </div>
+        
+      <div class="big-title">
+        <span><img src="assets/bikeshare-logo.jpg" class="bikeshare"/></span>
+        <div class="bikeshare-title">Nearest Stations</div>
+      </div>
+      <div class="bikeshare-data">
+        <div class="row1">
+          <p>Location</p>
+          <p>Bikes</p>
+          <p>Docks</p>
+        </div>
+        <div class="row2"
+         ng-repeat="bikes in bikestation"
+        >
+          <p>{{bikes.name}}</p>
+          <p>{{bikes.bikes_available}}</p>
+          <p>{{bikes.docks_available}}</p>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+ <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="libs/angular.js"></script>
+  <script src="libs/underscore.js"></script>
+  <script src="libs/jquery.js"></script>
+  <script src="reference.js"></script>
+
+</body>
+</html>
+

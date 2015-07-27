@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>The Iron Yard Test Runner</title>
+<head>
+  <title>Ruby Line App</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="rubyline.css">
+</head>
+<body>
+  <div class="container">
+    <div class="big-title">Ruby Line</div>
+  <div id="left-side">
+    <div class="station-title">Metro Station</div>
 
-    <link rel="stylesheet" href="libs/mocha.css" />
-    <script src="libs/mocha.js"></script>
-    <script src="libs/chai.js"></script>
-    <script src="libs/underscore.js"></script>
-    <script src="libs/jquery.js"></script>
-    <script src="libs/handlebars.js"></script>
+  </div>
+  <div id="right-side">
+    <div class="station-title">BikeShare</div>
+    <div class="bikeStats"></div>
+  </div>
+  </div>
 
-    <style>
-      header {
-        padding:10px;
-        vertical-align: top;
-        position: absolute;
-        top: 15px;
-      }
 
-      header a {
-        text-decoration: none;
-        font-size: 125%;
-        font-family: sans-serif;
-        color: #333;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <a href="test.html">The Iron Yard Test Runner</a>
-    </header>
-    <div id="mocha"></div>
+<template id= "left">
+    <div class="info">  
+    <div class="statname">{{arriving_at}}</div>
+    <span class="line-color {{line}}">{{line}}</span>
+    <span class="line-color {{line}}">{{destination}}</span>
+    <span class="line-color {{line}}">{{minutes}}</span>
+   </div>
+</template>
 
-    <script>
-      mocha.setup({
-        ui: "bdd"
-      }); 
 
-      var assert = chai.assert;
-      var expect = chai.expect;
-    </script>
+<template id= "right">
+  <div class="bikeinfo">  
+    <span class ="name">{{location}}</span>
+    <span class ="bikes">Bikes: {{bikes_avail}} </span>
+    <span class ="docks">Docks: {{docks_avail}} </span>
+  
+</div>
+</template>
+  <script src="libs/underscore.js"></script>
+  <script src="libs/handlebars.js"></script>
+  <script src="libs/jquery.js"></script>
+  <script src="rubyline.js"></script>
 
-    <!-- add testing files between here -->
-
-    <script src="index.js"></script>
-    <script src="test/test.index.js"></script>
-
-    <!-- add testing files between here -->
-
-    <script>
-      var z = mocha.run();
-      console.log(z)
-    </script>
-
-  </body>
+</body>
 </html>

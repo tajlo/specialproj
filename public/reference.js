@@ -110,45 +110,44 @@ var getLocation = function(){
            var map = new google.maps.Map(document.getElementById("google-map"), mapOptions); 
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style'); 
-
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: 'Hello World!'
-            });    
-
-            var latlng = new google.maps.LatLng(38.9061431, -77.0423197);
-
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                title: 'Hello World!'
-            });                
+         
           }) 
 }
 
 getLocation();
+
+
+
+
+
+$scope.clickMe = function(clickEvent){
+   $scope.clickEvent = codeAddress(clickEvent), getUberdata(clickEvent) , getMetrodata(clickEvent)
+}
+
+
+
+var a 
+var b 
+var c
+var d
+
 
 var codeAddress = function() {
     var address1 = document.getElementById("start").value
     var address2 = document.getElementById("end").value
     var geocoder;
     var map;
-    
-    var latitude1
-    var latitude2
-    var longitude1
-    var longitude2
+  
+
     
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(38.9061431, -77.0423197);
+    
     var mapOptions = {
-      zoom: 8,
-      center: latlng
+      zoom: 14,
     }
     map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
   
-    //var address2 = document.getElementById("end").value;
+    
     geocoder.geocode( { 'address': address1}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
 
@@ -157,49 +156,75 @@ var codeAddress = function() {
             map: map,
             position: results[0].geometry.location
         });
+        
+        a = marker.position['G']
+        b = marker.position['K']
 
-        console.log(marker.position)
+        
+
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
-  }
 
 
-var metroReq ={
-    method: 'GET',
-    url: 'http://1853ad1e.ngrok.com/fares',
-    data: { 
-      lat1: latitude1,
-      long1: longitude2,
-      lat2: latitude2,
-      long2: longitude2 
+    geocoder.geocode( { 'address': address2}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+
+          map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+           
+            });
+            c = marker.position['G']
+            d = marker.position['K']
+
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    }); 
+      
+}
+
+      
+
+
+var getUberdata = function(){
+var uberReq = $http({
+          method: 'GET',
+          url: 'http://rubyline.herokuapp.com/fares/uber?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+ d, 
+        
+      })
+
+  uberReq.then(
+    function(data){
+      $scope.ufares = data['data']['fares']
+      console.log(data.data.fares)
     }
+    )
 }
 
-var getMetroEstimate = function() {
-        $http(metroReq)
-          .success(function(data){
+var getMetrodata = function(){
+var mtrReq = $http({
+          method: 'GET',
+          url: 'http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+ d, 
+        
+      })
 
-            $scope.metroEstimate = []
-            
-          
-            $scope.metroEstimate = data.estimates
-            console.log($scope.bikestation)
-
-          })
+  mtrReq.then(
+    function(data){
+      $scope.mfares = data['data']['fares']
+      console.log(data.data.fares)
+    }
+    )
 }
+      
 
-
-
-
-
-
- 
 });
 
  // controller to "get" nearest metro and bikeshare stations
-/*app.controller("nearestStation", function($scope, $http, $interval){
+app.controller("nearestStation", function($scope, $http, $interval){
 
      var latitude;
      var longitude;
@@ -211,23 +236,25 @@ var getMetroEstimate = function() {
             latitude = position.coords.latitude
             longitude = position.coords.longitude
 
+            $interval(0, getMetroStation())
+            $interval(0, getBikeStation())
+
         })
       
   
 
 var bikeReq = {
      method: 'GET',
-     url: 'http://1853ad1e.ngrok.com/estimates/bike',   
-      data: { 
+     url: 'http://rubyline.herokuapp.com/estimates/bike',   
+    data: { 
       lat: latitude,
       long: longitude
-
     }
 }
 
 var metroReq ={
     method: 'GET',
-    url: 'http://1853ad1e.ngrok.com/estimates/train',
+    url: 'http://rubyline.herokuapp.com/estimates/train',
     data: { 
       lat: latitude,
       long: longitude
@@ -261,42 +288,21 @@ var metroReq ={
         $http(metroReq)
           .success(function(data){
 
-            $scope.metrostation =[
-              {
-                "name": $scope.name,
-                "trains":[{
-                  "destination": $scope.destination,
-                  "line": $scope.line,
-                  "minutes": $scope.minutes
-                }]
-              }
-
-            ]
-
             $scope.metrostation = data.locations
-           
 
-            $scope.metrostation.forEach(function(index){
-                console.log($scope.metrostation)
-                $scope.metrostation[index]['trains'].forEach(function(){
-                  console.log('hello')
-                })
-            })
-
-
-
-
+            
+         
+              
           })
       }
 
       
-      $interval(60000, getMetroStation())
-      $interval(60000, getBikeStation())
+      
       
 
 
 
-})*/
+})
 
 
 

@@ -86,6 +86,17 @@ select{
 	color: white;
 }
 
+.submitting{
+	margin-top: 2%;
+	margin-left: 10%;
+	padding: 5px;
+	width: 30%;
+	border-radius: 10px;
+	border-style: none;
+	background-color:rgba(52, 137, 165, 1);
+	color: white;
+}
+
 #google-map{
 	margin-top: 2%;
 	height: 200px;
@@ -152,7 +163,7 @@ select{
 	margin-top: 2%;
 	margin-left: 4%;
 	display: inline-block;
-	width: 42%;
+	width: 45%;
 
 }
 
@@ -161,6 +172,7 @@ select{
 	border-radius: 15px;
 	padding: 4%;
 	color:white;
+	font-size: 11px;
 	display: inline-block;
 	width: 160px;
 	box-shadow: 1px 1px gray;
@@ -173,10 +185,12 @@ select{
 	height: 30px;
 	width: 30px;
 	color: white;
+	font-size: 11px;
 	display: inline-block;
 	padding-top:3%;
 	text-align: center;
 	box-shadow: 1px 1px gray;
+
 }
 
 /*BikeShare*/

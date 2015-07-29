@@ -6,14 +6,12 @@
 </head>
 <body>
   <div class="container">
-    <div class="rubyline-header">
-      <h1 class="header">RUBYLINE</h1>
-    </div>
+    
     <div class="column-left" ng-controller="fareEstimator">
         <div class="form">
           <div class="form-title">Where do you want to go?</div>
           <div class="form-info">
-           <input type="textbox" id="start" placeholder="starting location" value="1815 M St NW, Washington, DC "/>
+           <input type="textbox" id="start" placeholder="starting location" />
            <input type="text" id="end" placeholder="ending location" value=""/>
             <div class="people">
              <select>
@@ -29,16 +27,17 @@
              </select>
              <span>people</span>
             </div>
-            <button class="submit" ng-click="codeAddress()">Go!</button>
+            <button class="submitting" ng-click=" clickMe($event) ">Go!</button>
           </div>
         </div>
       <div id="google-map" >
       </div>
-      <div class="uber-data">
-         <img src="assets/uber-logo.png" class="uber"/> <span>$26.35</span>
+      
+      <div class="uber-data" >
+         <img src="assets/uber-logo.png" class="uber"/> <span ng-repeat="fare in ufares">{{fare.estimate}} </span><span >{{fare.duration}} min</span>
       </div>
       <div class="metro-data">
-        <img src="assets/wmata-logo.png" class="wmata"/> <span> $14.60</span>
+        <img src="assets/wmata-logo.png" class="wmata"/> <span ng-repeat="fare in mfares"> ${{fare.fare}} {{fare.duration}}min</span>
       </div>
     </div>
 
@@ -49,12 +48,15 @@
           Nearest Stations</div>
       </div>
       <div class="metro-data">
-        <div class="station-name" ng-repeat="metros in metrostation" ng-bind="metros.name">  </div>
-        <div class="line-info" >
-          <div class="destination" ng-class="{{metros.line}}">
-            {{metros.line}} - {{metros.destination}}
+        <div class="station-name" ng-repeat="metros in metrostation">
+          <div ng-bind="metros.name"></div>
+          <div class="line-info" ng-repeat="train in metros.trains">
+            <div class="destination" ng-class="{{train.line[0]}}"> 
+              {{ train.line[0] }} {{ train.line[1] }}
+            </div>
+            <div class="time" ng-bind="train.minutes"> </div>
+          
           </div>
-          <div class="time">{{metros.minutes}} </div>
         </div>
         
       <div class="big-title">

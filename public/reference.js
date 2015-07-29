@@ -97,10 +97,10 @@ var getLocation = function(){
                     latitude = position.coords.latitude
                     longitude = position.coords.longitude
 
-          var myLatlng = new google.maps.LatLng( latitude  , longitude);
+          var myLatlng = new google.maps.LatLng(latitude  , longitude);
 
           var mapOptions = {
-            zoom: 12,
+            zoom: 8,
             center: myLatlng,
             mapTypeControlOptions: {
                 mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
@@ -115,7 +115,15 @@ var getLocation = function(){
                 position: myLatlng,
                 map: map,
                 title: 'Hello World!'
-            });          
+            });    
+
+            var latlng = new google.maps.LatLng(38.9061431, -77.0423197);
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Hello World!'
+            });                
           }) 
 }
 
@@ -156,7 +164,7 @@ var codeAddress = function() {
       }
     });
   }
-codeAddress();
+
 
 var metroReq ={
     method: 'GET',
@@ -191,7 +199,7 @@ var getMetroEstimate = function() {
 });
 
  // controller to "get" nearest metro and bikeshare stations
-app.controller("nearestStation", function($scope, $http, $interval){
+/*app.controller("nearestStation", function($scope, $http, $interval){
 
      var latitude;
      var longitude;
@@ -256,8 +264,7 @@ var metroReq ={
             $scope.metrostation =[
               {
                 "name": $scope.name,
-                "trains":[
-                {
+                "trains":[{
                   "destination": $scope.destination,
                   "line": $scope.line,
                   "minutes": $scope.minutes
@@ -289,7 +296,7 @@ var metroReq ={
 
 
 
-})
+})*/
 
 
 

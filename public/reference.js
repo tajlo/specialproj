@@ -229,74 +229,65 @@ app.controller("nearestStation", function($scope, $http, $interval){
      var latitude;
      var longitude;
 
-      
         navigator.geolocation.getCurrentPosition(function(position){
             console.log("position", position)
 
             latitude = position.coords.latitude
             longitude = position.coords.longitude
 
-            $interval(0, getMetroStation())
-            $interval(0, getBikeStation())
 
+         $interval(60000, getMetroStation(latitude, longitude))
+         $interval(60000, getBikeStation(latitude, longitude))
         })
       
   
-
-var bikeReq = {
-     method: 'GET',
-     url: 'http://rubyline.herokuapp.com/estimates/bike',   
-    data: { 
-      lat: latitude,
-      long: longitude
-    }
-}
-
-var metroReq ={
-    method: 'GET',
-    url: 'http://rubyline.herokuapp.com/estimates/train',
-    data: { 
-      lat: latitude,
-      long: longitude
-    }
-}
-
       var getBikeStation = function() {
-        $http(bikeReq)
-          .success(function(data){
-
-            $scope.bikestation = [
-              {
-              "name": $scope.name,
-              "type": $scope.type,
-              "bikes_avail": $scope.bikes_avail,
-              "docks_avail":$scope.docks_avail
-              }
-            ]
+         var bikeReq = {
+             method: 'GET',
+             url: 'http://rubyline.herokuapp.com/estimates/bike?',
+             data:{
+              lat: latitude,
+              long: longitude
+             }   
             
-          
+        }
+
+         $http(bikeReq)
+          .success(
+          function(data){
+
+            $scope.bikestation = []
+            
+
             $scope.bikestation = data.locations
             console.log($scope.bikestation)
 
-
-          })
-        
-
-      }
-
-      var getMetroStation = function(){
-        $http(metroReq)
-          .success(function(data){
-
-            $scope.metrostation = data.locations
-
-            
-         
-              
-          })
-      }
+          }
+        )
+       }
 
       
+
+      var getMetroStation = function(){
+        var metroReq = {
+            method: 'GET',
+            url: 'http://rubyline.herokuapp.com/estimates/train?',
+            data: {
+              lat: latitude,
+              long: longitude
+            }
+            
+        }
+
+        $http(metroReq)
+        .success(
+          function(data){
+            $scope.metrostation = data.locations
+      }
+    )
+    }
+
+         
       
       
 

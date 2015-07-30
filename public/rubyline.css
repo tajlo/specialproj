@@ -6,48 +6,173 @@
 
 .container {
 	font-family: 'Helvetica';
-	
+
+
 }
-/*Header*/
-.rubyline-header{
-	position: relative;
-	margin-top: 1%;
-	width: 85%;
-	background-color: rgba(52, 137, 165, 1);
-	height: 15vh;
-	border-radius: 10px;
+
+.hero {
+	background-image: url('assets/transit.gif');
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 40%;
+}
+
+
+/*Landing Page*/
+
+.landing{
+	height: 100vh
+}
+
+.big-logo{
+	transform: translate(44%,7vh );
+}
+
+.landing span{
+	font-size: 40px;
+	color: blue;
+}
+
+#navigate{
+	font-family: 'Permanent Marker';
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 90px;
+	letter-spacing: 15px;
+	transform: translate(23%,33vh );
+}
+
+/*Live Updates*/
+
+.live-updates{
+	background-image: url('assets/white-stroke.png');
+	background-size: cover;
+	height: 100vh;
+	width: 100%;
+	margin-top: -5%;
+}
+#live{
+	width: 40px;
+	font-size: 40px;
+	word-wrap: break-word;
+	margin-left: 2%;
+	font-family: 'Permanent Marker';
+	color: rgba(0, 0, 0, 0.8);
+	transform: translate(23%,15vh );
+}
+
+#explain{
+	position: absolute;
+	font-family: 'Permanent Marker';
+	font-size: 36px;
+	left: 40%;
+	top: 105vh;
+	width: 50%;
+	
+
+
+}
+
+/*Metro Data & Bike Share Data  */
+.metro-data{
+	transform: translate(20%, 43vh );
+}
+
+
+.wmata{
+	width: 30px;
+	height: 30px;
+	vertical-align: top;
+}
+/*Right Side*/
+.big-title{
+	margin-left: 10px;
+	margin-top: 2%;
+}
+
+.metro-title, .bikeshare-title{
+	width: 40%;
+	background-color: rgba(190, 190, 190, 1);
+	border-radius: 100px;
+	text-align: center;
+	padding: 2%;
+	color: white;
+	vertical-align: top;
+}
+
+.station-name{
+	margin-top: 2%;
+	margin-left: 5%;
+}
+
+.line-info{
+	margin-top: 2%;
+	display: inline-block;
+	width: 45%;
+
+}
+
+.destination{
+	background-color: rgba(180, 217, 67, 1);
+	border-radius: 15px;
+	padding: 2%;
+	color:white;
+	font-size: 11px;
+	display: inline-block;
+	width: 175px;
 	box-shadow: 1px 1px gray;
 }
 
-.header{
-	position: relative;
-	left: 55%;
-	bottom: 13%;
+.time{
+	margin-left: 5px;
+	background-color: rgba(180, 217, 67, 1);
+	border-radius: 100%;
+	height: 30px;
+	width: 30px;
 	color: white;
-	font-size: 96px;
-	font-family: 'Impact';
+	font-size: 11px;
+	display: inline-block;
+	padding-top:1.5%;
+	text-align: center;
+	box-shadow: 1px 1px gray;
+	vertical-align: top;
+
 }
 
-/*Columns*/
-.column-left, .column-right {
-	display: inline-block;
-	width: 45%;
-	vertical-align: top;
-	margin-top: 3%
+/*BikeShare*/
+.bikeshare{
+	height: 50px;
+	width: 60px;
 }
+
+p{
+	display: inline-block;
+	width: 30%;
+	padding-left: 10px;
+	font-size: 10px;
+}
+
+.row1{
+	width: 60%;
+	border-bottom: 1px solid black;
+	margin-top: 20px;
+}
+
+
 
 /*Left Side*/
-.column-left{
-	padding-left: 10%;
 
+.column-left{
+	margin-top: 25vh;
+	height: 70vh;
+	transform: translate(22%, 45vh );
 }
 
 
 .form-title{
 	width: 50%;
 	text-align: center;
-	padding-top: 3%;
-	height: 7vh;
+	padding-top: 20px ;
+	height: 10vh;
 	background-color: rgba(190, 190, 190, 1);
 	border-radius: 100px;
 	color: white;
@@ -60,7 +185,6 @@ input{
 	margin-top: 2%;
 	border: none;
 	border-bottom: 1px solid gray;
-	color: turquoise;
 	text-align: center;
 
 }
@@ -101,6 +225,7 @@ select{
 	margin-top: 2%;
 	height: 200px;
 	width: 200px;
+	  left: 185px;
 }
 
 .map{
@@ -108,8 +233,13 @@ select{
 	height: 150px;
 	width: 200px;
 }
+.metro{
+	margin-bottom: 20px;
+	padding-left: 35px;
 
+}
 .uber-data{
+
 	padding-left: 2%;
 }
 
@@ -122,95 +252,9 @@ select{
 	width: 50px;
 	height: 50px;
 }
-.metro-data{
-	padding-left: 4%;
-}
 
-.metro-data span{
-	line-height: 30px;
-	vertical-align: top;
-	margin-left: 2%;
-}
 
-.wmata{
-	width: 30px;
-	height: 30px;
-	vertical-align: top;
-}
-/*Right Side*/
-.big-title{
-	margin-left: 150px;
-	margin-top: 2%;
-}
 
-.metro-title, .bikeshare-title{
-	width: 40%;
-	background-color: rgba(190, 190, 190, 1);
-	border-radius: 100px;
-	text-align: center;
-	display: inline-block;
-	padding: 2%;
-	color: white;
-	vertical-align: top;
-}
-
-.station-name{
-	margin-top: 2%;
-	margin-left: 5%;
-}
-
-.line-info{
-	margin-top: 2%;
-	margin-left: 4%;
-	display: inline-block;
-	width: 45%;
-
-}
-
-.destination{
-	background-color: rgba(180, 217, 67, 1);
-	border-radius: 15px;
-	padding: 4%;
-	color:white;
-	font-size: 11px;
-	display: inline-block;
-	width: 160px;
-	box-shadow: 1px 1px gray;
-}
-
-.time{
-	margin-left: 5px;
-	background-color: rgba(180, 217, 67, 1);
-	border-radius: 100%;
-	height: 30px;
-	width: 30px;
-	color: white;
-	font-size: 11px;
-	display: inline-block;
-	padding-top:3%;
-	text-align: center;
-	box-shadow: 1px 1px gray;
-
-}
-
-/*BikeShare*/
-.bikeshare{
-	height: 50px;
-	width: 60px;
-}
-
-p{
-	display: inline-block;
-	width: 30%;
-	padding-left: 10px;
-	font-size: 10px;
-}
-
-.row1{
-	width: 90%;
-	border-bottom: 1px solid black;
-	margin-top: 20px;
-}
 
 
 

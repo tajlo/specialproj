@@ -18,15 +18,15 @@
 /*Landing Page*/
 
 .landing{
-	height: 100vh
+	height: 200vh
 }
 
 
 #navigate{
-	font-family: 'Permanent Marker';
+	
 	color: rgba(255, 255, 255, 1);
-	font-size: 48px;
-	letter-spacing: 15px;
+	font-size: 64px;
+	
 	transform: translate(30%,3vh );
 }
 
@@ -56,17 +56,6 @@
 	transform: translate(23%,15vh );
 }
 
-#explain{
-	position: absolute;
-	font-family: 'Permanent Marker';
-	font-size: 36px;
-	left: 40%;
-	top: 105vh;
-	width: 50%;
-	
-
-
-}
 
 /*Metro Data & Bike Share Data  */
 .metro-data{
@@ -87,7 +76,7 @@
 
 #google-map{
 	height: 210px;
-	width: 210px;
+	width: 250px;
 	display: inline-block;
 	transform: translateY( 10vh );
 }
@@ -138,7 +127,7 @@ input:focus{
 .bottom{
 	
 	padding-left: 100px;
-	height: 40vh;
+	height: 20vh;
 
 }
 
@@ -148,20 +137,26 @@ input:focus{
 .column1, .column2, .column3{
 	width: 30%;
 	display: inline-block;
-	
 	vertical-align: top;
+	border: solid 1px white;
+	height: 200px;
 }
 
 .drive{
 	width: 100%;
+	height: 20%;
 	background-color: rgba(51, 51, 51, 1);
 	color: white;
 	padding: 10px;
 	text-align: center;
 	font-size: 12px;
+	overflow-y: scroll ;
 }
 
 #directions{
+	height: 80%;
+	background-color: rgba(255, 255 , 255,.4);
+	overflow-y: scroll ;
 	
 }
 

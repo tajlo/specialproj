@@ -11,7 +11,7 @@
   <div class="container">
     <div class ="hero">
        <div class="landing"ng-controller="fareEstimator">
-         <h1 id="navigate"></h1>
+         <h1 id="navigate"> Navigate DC</h1>
 
         <div class="column-left" >
             <div class="form">
@@ -22,15 +22,15 @@
                  <input type="textbox" id="peeps" placeholder="# of people" />
                  
                   <button class="submitting" ng-click=" clickMe($event) ">Go!</button>
-                  <button class="submitting" ng-click=" ickMe($event) ">View Results>>></button>
+                  <button class="submitting" ng-click=" ickMe($event) ">calc my route>>></button>
                 </div>
             </div>
               <div id="google-map" ></div>  
         </div>
             <div class="bottom">
                   <div class="column1">
-                  <div class="drive">Drive/Walk </div>
-                   <div class="drive">Option 1 </div>
+                  <div class="drive">Drive </div>
+                  
                     <div id="directions"></div>
                  
                   </div>
@@ -39,7 +39,6 @@
                      <div class="drive" ng-repeat="fare in ufares">
                         {{fare.type}}
                      <div>{{fare.estimate}} </div> 
-                     <div>{{fare.estimate}}.split('')</div>
                     <div>{{fare.duration}} min</div> 
                      </div> 
                                            

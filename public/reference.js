@@ -214,7 +214,7 @@ var codeAddress = function() {
           var request = {
             origin:address1,
             destination:address2,
-            travelMode: google.maps.TravelMode.DRIVING
+            travelMode: google.maps.TravelMode.TRANSIT
           };
           directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -234,9 +234,7 @@ var uberReq = $http({
     function(data){
       $scope.ufares = data['data']['fares']
 
-      $scope.ufares.forEach('estimate', function(value, key){
-        console.log(value : key);
-      })
+      
       console.log(data.data.fares)
 
 

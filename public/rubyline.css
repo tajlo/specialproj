@@ -11,10 +11,7 @@
 }
 
 .hero {
-	background-image: url('assets/transit.gif');
-	background-size: cover;
-	background-repeat: no-repeat;
-	opacity: 40%;
+	background-color: rgba(39, 40, 34, 1);
 }
 
 
@@ -24,21 +21,20 @@
 	height: 100vh
 }
 
-.big-logo{
-	transform: translate(44%,7vh );
-}
-
-.landing span{
-	font-size: 40px;
-	color: blue;
-}
 
 #navigate{
 	font-family: 'Permanent Marker';
-	color: rgba(255, 255, 255, 0.8);
-	font-size: 90px;
+	color: rgba(255, 255, 255, 1);
+	font-size: 48px;
 	letter-spacing: 15px;
-	transform: translate(23%,33vh );
+	transform: translate(30%,3vh );
+}
+
+.form{
+	display: inline-block;
+	width: 30%;
+	vertical-align: top;
+
 }
 
 /*Live Updates*/
@@ -78,180 +74,103 @@
 }
 
 
-.wmata{
-	width: 30px;
-	height: 30px;
-	vertical-align: top;
-}
-/*Right Side*/
-.big-title{
-	margin-left: 10px;
-	margin-top: 2%;
-}
-
-.metro-title, .bikeshare-title{
-	width: 40%;
-	background-color: rgba(190, 190, 190, 1);
-	border-radius: 100px;
-	text-align: center;
-	padding: 2%;
-	color: white;
-	vertical-align: top;
-}
-
-.station-name{
-	margin-top: 2%;
-	margin-left: 5%;
-}
-
-.line-info{
-	margin-top: 2%;
-	display: inline-block;
-	width: 45%;
-
-}
-
-.destination{
-	background-color: rgba(180, 217, 67, 1);
-	border-radius: 15px;
-	padding: 2%;
-	color:white;
-	font-size: 11px;
-	display: inline-block;
-	width: 175px;
-	box-shadow: 1px 1px gray;
-}
-
-.time{
-	margin-left: 5px;
-	background-color: rgba(180, 217, 67, 1);
-	border-radius: 100%;
-	height: 30px;
-	width: 30px;
-	color: white;
-	font-size: 11px;
-	display: inline-block;
-	padding-top:1.5%;
-	text-align: center;
-	box-shadow: 1px 1px gray;
-	vertical-align: top;
-
-}
-
-/*BikeShare*/
-.bikeshare{
-	height: 50px;
-	width: 60px;
-}
-
-p{
-	display: inline-block;
-	width: 30%;
-	padding-left: 10px;
-	font-size: 10px;
-}
-
-.row1{
-	width: 60%;
-	border-bottom: 1px solid black;
-	margin-top: 20px;
-}
-
-
 
 /*Left Side*/
 
 .column-left{
-	margin-top: 25vh;
-	height: 70vh;
-	transform: translate(22%, 45vh );
-}
-
-
-.form-title{
-	width: 50%;
-	text-align: center;
-	padding-top: 20px ;
-	height: 10vh;
-	background-color: rgba(190, 190, 190, 1);
-	border-radius: 100px;
-	color: white;
-	
+	transform: translateY( 10vh );
+	margin-bottom: 75px;
+	padding-left: 25%;
 
 }
+
+
+#google-map{
+	height: 210px;
+	width: 210px;
+	display: inline-block;
+	transform: translateY( 10vh );
+}
+
 
 input{
-	width: 50%;
-	margin-top: 2%;
-	border: none;
-	border-bottom: 1px solid gray;
+	width: 80%;
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid white;
 	text-align: center;
+	background-color: rgba(39, 40, 34, 1);
+	font-size: 14px;
+	color: white;
+	text-shadow: none;
+
 
 }
+
+input:focus{
+	outline: none;
+
+}
+
 
 .people{
 	margin-top: 2%;
 	font-size: 12px;
-	color: gray;
-}
-
-select{
-	margin-left: 17%;
-}
-
-.submit{
-	margin-top: 2%;
-	margin-left: 15%;
-	padding: 5px;
-	width: 20%;
-	border-radius: 10px;
-	border-style: none;
-	background-color:rgba(52, 137, 165, 1);
 	color: white;
+}
+
+.form-info h1{
+	color: white;
+	
 }
 
 .submitting{
 	margin-top: 2%;
-	margin-left: 10%;
 	padding: 5px;
-	width: 30%;
-	border-radius: 10px;
+	width: 80%;
 	border-style: none;
 	background-color:rgba(52, 137, 165, 1);
 	color: white;
 }
 
-#google-map{
-	margin-top: 2%;
-	height: 200px;
-	width: 200px;
-	  left: 185px;
-}
 
-.map{
-	padding-left: 5%;
-	height: 150px;
-	width: 200px;
-}
-.metro{
-	margin-bottom: 20px;
-	padding-left: 35px;
+/*columns*/
+.bottom{
+	
+	padding-left: 100px;
+	height: 40vh;
 
 }
-.uber-data{
 
-	padding-left: 2%;
+.hidden{
+	display: none;
 }
-
-.uber-data span {
-	line-height: 50px;
+.column1, .column2, .column3{
+	width: 30%;
+	display: inline-block;
+	
 	vertical-align: top;
 }
-.uber{
-	vertical-align: top;
-	width: 50px;
-	height: 50px;
+
+.drive{
+	width: 100%;
+	background-color: rgba(51, 51, 51, 1);
+	color: white;
+	padding: 10px;
+	text-align: center;
+	font-size: 12px;
 }
+
+#directions{
+	
+}
+
+.icon{
+	display: inline-block;
+	position: relative;
+	left: 2px;
+}
+
 
 
 

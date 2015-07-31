@@ -121,8 +121,12 @@ getLocation();
 
 
 $scope.clickMe = function(clickEvent){
-   $scope.clickEvent = codeAddress(clickEvent), getUberdata(clickEvent) , getMetrodata(clickEvent)
+   $scope.clickEvent = codeAddress(clickEvent)
 }
+
+$scope.ickMe = function(ickEvent){
+   $scope.ickEvent =  getUberdata(ickEvent) , getMetrodata(ickEvent), calcRoute(ickEvent)
+ }
 
 
 
@@ -131,32 +135,35 @@ var b
 var c
 var d
 
-
-var codeAddress = function() {
-    var address1 = document.getElementById("start").value
-    var address2 = document.getElementById("end").value
-    var geocoder;
-    var map;
+//var address1 = document.getElementById("start").value
+//var address2 = document.getElementById("end").value
+var peeps = document.getElementById("peeps").value
+var map;
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
   
-
-    
-    geocoder = new google.maps.Geocoder();
-    
+var codeAddress = function() {
+  var address1 = document.getElementById("start").value
+  var address2 = document.getElementById("end").value
+  
     var mapOptions = {
       zoom: 14,
+      
     }
-    map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
-  
-    
+  var geocoder = new google.maps.Geocoder();
+
+  map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+
     geocoder.geocode( { 'address': address1}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
 
       map.setCenter(results[0].geometry.location);
+       console.log(results[0].geometry.location)
         var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-        
+          map: map,
+          position: results[0].geometry.location
+      });
+
         a = marker.position['G']
         b = marker.position['K']
 
@@ -175,7 +182,6 @@ var codeAddress = function() {
             var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
-           
             });
             c = marker.position['G']
             d = marker.position['K']
@@ -187,8 +193,35 @@ var codeAddress = function() {
       
 }
 
-      
 
+ var calcRoute = function() {
+  var address1 = document.getElementById("start").value
+  var address2 = document.getElementById("end").value
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+    
+
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    var dc = new google.maps.LatLng(38.9047,-77.0164);
+    var mapOptions = {
+      zoom: 14,
+      center: dc
+    }
+    map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById("directions"));
+
+          var request = {
+            origin:address1,
+            destination:address2,
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+          directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(response);
+            }
+          });
+    }
 
 var getUberdata = function(){
 var uberReq = $http({
@@ -200,7 +233,13 @@ var uberReq = $http({
   uberReq.then(
     function(data){
       $scope.ufares = data['data']['fares']
+
+      $scope.ufares.forEach('estimate', function(value, key){
+        console.log(value : key);
+      })
       console.log(data.data.fares)
+
+
     }
     )
 }
@@ -215,16 +254,22 @@ var mtrReq = $http({
   mtrReq.then(
     function(data){
       $scope.mfares = data['data']['fares']
+
+
       console.log(data.data.fares)
+
+
+      
+      
     }
     )
 }
-      
+  
 
 });
 
  // controller to "get" nearest metro and bikeshare stations
-app.controller("nearestStation", function($scope, $http, $interval){
+/*app.controller("nearestStation", function($scope, $http, $interval){
 
      var latitude;
      var longitude;
@@ -294,6 +339,6 @@ app.controller("nearestStation", function($scope, $http, $interval){
 
 
 })
-
+*/
 
 

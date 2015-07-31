@@ -2,94 +2,62 @@
 <html ng-app="RubyLineApp">
 <head>
   <title>Ruby Line App</title>
-  <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="rubyline.css">
 </head>
 <body>
+
   <div class="container">
     <div class ="hero">
-       <div class="landing">
-         <div class="big-logo">
-        
-          </div>
-         <h1 id="navigate">Navigate DC</h1>
-       </div>
-    </div>
+       <div class="landing"ng-controller="fareEstimator">
+         <h1 id="navigate"></h1>
 
-    <div class="live-updates" ng-controller="nearestStation">
-      
-      <p id="explain"> "Real time updates. View upcoming trains closest to you."</p>
-      <div class="metro-data">
-      <div class="big-title">
-        
-        <div class="metro-title">
-          Metro</div>
-      </div>
-        <div class="station-name" ng-repeat="metros in metrostation">
-          <div >{{metros.name}}</div>
-          <div class="line-info" ng-repeat="train in metros.trains">
-            <div class="destination" ng-class="{{train.line[0]}}"> 
-              {{ train.line[0] }} {{ train.line[1] }}
+        <div class="column-left" >
+            <div class="form">
+                <div class="form-info">
+                 <h1>Start Here</h1>
+                 <input type="textbox" id="start" placeholder="starting location" />
+                 <input type="textbox" id="end" placeholder="ending location" />
+                 <input type="textbox" id="peeps" placeholder="# of people" />
+                 
+                  <button class="submitting" ng-click=" clickMe($event) ">Go!</button>
+                  <button class="submitting" ng-click=" ickMe($event) ">View Results>>></button>
+                </div>
             </div>
-            <div class="time" ng-bind="train.minutes"> </div>
-          
-          </div>
+              <div id="google-map" ></div>  
         </div>
-        
-      <div class="big-title">
-        
-        <div class="bikeshare-title">BikeShare</div>
-      </div>
-      <div class="bikeshare-data">
-        <div class="row1">
-          <p>Location</p>
-          <p>Bikes</p>
-          <p>Docks</p>
-        </div>
-        <div class="row2"
-         ng-repeat="bikes in bikestation"
-        >
-          <p>{{bikes.name}}</p>
-          <p>{{bikes.bikes_available}}</p>
-          <p>{{bikes.docks_available}}</p>
-        </div>
-        
-      </div>
-    </div>
-    <div class="column-left" ng-controller="fareEstimator">
-        <div class="form">
-          <div class="form-title">Where do you want to go?</div>
-          <div class="form-info">
-           <input type="textbox" id="start" placeholder="starting location" />
-           <input type="text" id="end" placeholder="ending location" value=""/>
-            <div class="people">
-             <select>
-               <option>2</option>
-               <option>3</option>
-               <option>4</option>
-               <option>5</option>
-               <option>6</option>
-               <option>7</option>
-               <option>8</option>
-               <option>9</option>
-               <option>10</option>
-             </select>
-             <span>people</span>
+            <div class="bottom">
+                  <div class="column1">
+                  <div class="drive">Drive/Walk </div>
+                   <div class="drive">Option 1 </div>
+                    <div id="directions"></div>
+                 
+                  </div>
+                  <div class="column2" >
+                    <div class="drive">Uber</div>
+                     <div class="drive" ng-repeat="fare in ufares">
+                        {{fare.type}}
+                     <div>{{fare.estimate}} </div> 
+                     <div>{{fare.estimate}}.split('')</div>
+                    <div>{{fare.duration}} min</div> 
+                     </div> 
+                                           
+                  </div>
+                  <div class="column3">
+                    <div class="drive">Metro</div>
+                    <div class="drive" ng-repeat="fare in mfares">
+                        Metro
+                      <div> ${{fare.fare}} </div> 
+                     <div>{{fare.duration}} min</div> 
+                     </div> 
+                             
+                    
+                  </div>
             </div>
-            <button class="submitting" ng-click=" clickMe($event) ">Go!</button>
-          </div>
-        </div>
-      <div id="google-map" ></div>
-      
-      <div class="uber-data" >
-         <img src="assets/uber-logo.png" class="uber"/> <div ng-repeat="fare in ufares">{{fare.estimate}} </div><span>{{fare.duration}} min</span>
-      </div>
-      <div class="metro">
-        <img src="assets/wmata-logo.png" class="wmata"/> <span ng-repeat="fare in mfares"> ${{fare.fare}} {{fare.duration}}min</span>
-      </div>
+            </div>
+    
     </div>
-
   </div>
 
  <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>

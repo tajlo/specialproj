@@ -112,39 +112,39 @@ var getLocation = function(){
             map.setMapTypeId('map_style'); 
          
           }) 
+}();
+
+
+
+
+
+
+
+
+$scope.address = {
+    address1: '',
+    address2: ''
 }
 
-getLocation();
-
-
-
-
-
-$scope.clickMe = function(clickEvent){
-   $scope.clickEvent = codeAddress(clickEvent)
+$scope.people = {
+   number: [2, 3 , 4, 5 ,6 , 7, 8 , 9, 10, 11 , 12]
 }
-
-$scope.ickMe = function(ickEvent){
-   $scope.ickEvent =  getUberdata(ickEvent) , getMetrodata(ickEvent), calcRoute(ickEvent)
- }
-
-
 
 var a 
 var b 
 var c
 var d
 
-//var address1 = document.getElementById("start").value
-//var address2 = document.getElementById("end").value
-var peeps = document.getElementById("peeps").value
+
+
+
+
 var map;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
   
 var codeAddress = function() {
-  var address1 = document.getElementById("start").value
-  var address2 = document.getElementById("end").value
+ 
   
     var mapOptions = {
       zoom: 14,
@@ -154,18 +154,11 @@ var codeAddress = function() {
 
   map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
 
-    geocoder.geocode( { 'address': address1}, function(results, status) {
+    geocoder.geocode( { 'address': $scope.address.address1}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
 
-      map.setCenter(results[0].geometry.location);
-       console.log(results[0].geometry.location)
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-
-        a = marker.position['G']
-        b = marker.position['K']
+        a = results[0].geometry.location['G']
+        b = results[0].geometry.location['K']
 
         
 
@@ -175,31 +168,26 @@ var codeAddress = function() {
     });
 
 
-    geocoder.geocode( { 'address': address2}, function(results, status) {
+    geocoder.geocode( { 'address': $scope.address.address2}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
 
-          map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-            c = marker.position['G']
-            d = marker.position['K']
+            c = results[0].geometry.location['G']
+            d = results[0].geometry.location['K']
 
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     }); 
+
       
 }
 
 
- var calcRoute = function() {
-  var address1 = document.getElementById("start").value
-  var address2 = document.getElementById("end").value
+ $scope.calcRoute = function() {
+  
   var directionsDisplay;
   var directionsService = new google.maps.DirectionsService();
-    
+    codeAddress()
 
     directionsDisplay = new google.maps.DirectionsRenderer();
     var dc = new google.maps.LatLng(38.9047,-77.0164);
@@ -212,30 +200,34 @@ var codeAddress = function() {
     directionsDisplay.setPanel(document.getElementById("directions"));
 
           var request = {
-            origin:address1,
-            destination:address2,
-            travelMode: google.maps.TravelMode.TRANSIT
+            origin:$scope.address.address1,
+            destination:$scope.address.address2,
+            travelMode: google.maps.TravelMode.WALKING
           };
           directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
+                
+                getUberdata()
+                getMetrodata()
             }
           });
-    }
+}
 
 var getUberdata = function(){
+
+var peeps = document.getElementById("people").value
 var uberReq = $http({
           method: 'GET',
-          url: 'http://rubyline.herokuapp.com/fares/uber?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+ d, 
-        
+          url: 'http://rubyline.herokuapp.com/fares/uber?lat1='+a+ '&long1=' +b+ '&lat2=' + c + '&long2=' +d+ '&riders=' + peeps , 
       })
 
   uberReq.then(
     function(data){
       $scope.ufares = data['data']['fares']
 
-      
       console.log(data.data.fares)
+     
 
 
     }
@@ -243,28 +235,42 @@ var uberReq = $http({
 }
 
 var getMetrodata = function(){
-var mtrReq = $http({
-          method: 'GET',
-          url: 'http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+ d, 
-        
-      })
+  var peeps = document.getElementById("people").value
+  var mtrReq = $http({
+            method: 'GET',
+            url: 'http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+d+ '&riders=' + peeps, 
+          
+        })
 
   mtrReq.then(
     function(data){
       $scope.mfares = data['data']['fares']
 
-
       console.log(data.data.fares)
+    })
 
+  
+  var metroReq = {
+      method: 'GET',
+      url: 'http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b ,
+     
+      
+  }
 
-      
-      
-    }
-    )
+  $http(metroReq)
+  .then(
+    function(data){
+      $scope.metrostation = data.data.locations[0]
+      console.log(data.data.locations)
+})
+  
+
 }
   
 
 });
+
+
 
  // controller to "get" nearest metro and bikeshare stations
 /*app.controller("nearestStation", function($scope, $http, $interval){

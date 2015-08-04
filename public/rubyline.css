@@ -26,7 +26,9 @@
 	
 	color: rgba(255, 255, 255, 1);
 	font-size: 64px;
-	transform: translate(34%,2vh );
+	transform: translate(30%,2vh );
+	vertical-align: top;
+	margin-bottom: 30px;
 }
 
 .form{
@@ -45,7 +47,11 @@
 	transform: translate(20%, 43vh );
 }
 
-
+#car{
+	height: 60px;
+	width: 60px;
+		vertical-align: top;
+}
 
 /*Left Side*/
 

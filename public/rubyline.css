@@ -5,7 +5,7 @@
 }
 
 .container {
-	font-family: 'Avenir';
+	font-family: 'Arial';
 
 
 }
@@ -30,33 +30,14 @@
 }
 
 .form{
-	display: inline-block;
-	width: 60%;
-	height: 250px;
-	vertical-align: top;
-	border: 1px solid white;
-	text-align: center;
-
-}
-
-/*Live Updates*/
-
-.live-updates{
-	background-image: url('assets/white-stroke.png');
-	background-size: cover;
-	height: 100vh;
+	
 	width: 100%;
-	margin-top: -5%;
+	vertical-align: top;
+	padding-left: 7%;
+
 }
-#live{
-	width: 40px;
-	font-size: 40px;
-	word-wrap: break-word;
-	margin-left: 2%;
-	font-family: 'Permanent Marker';
-	color: rgba(0, 0, 0, 0.8);
-	transform: translate(23%,15vh );
-}
+
+
 
 
 /*Metro Data & Bike Share Data  */
@@ -70,7 +51,7 @@
 
 .column-left{
 	transform: translateY( 4vh );
-	margin-bottom: 35px;
+	margin-bottom: 100px;
 	padding-left: 8%;
 
 }
@@ -78,19 +59,19 @@
 
 #google-map{
 	height: 250px;
-	width: 350px;
+	width: 100%;
 	display: inline-block;
 	transform: translate( 10vh );
 }
 
 
 input{
-	width: 70%;
-	height: 36px;
-	margin-bottom: 10px;
+	width: 27%;
+	height: 24px;
+	
 	padding: 5px;
 	border: 1px solid white;
-	text-align: center;
+	
 	background-color: rgba(39, 40, 34, 1);
 	font-size: 14px;
 	color: white;
@@ -114,24 +95,24 @@ input:focus{
 }
 
 .form-info{
-	padding-top: 5%;
+	
 	color:white;
-	font-size: 36px;
+	font-size: 14px;
 }
 
 .form-info select{
-	vertical-align: middle;
-	font-size: 36px;
+	font-size: 12px;
+
 }
 
 .submitting{
-	margin-top: 2%;
-	margin-left: 12%;
+	border-radius: 3px;
 	padding: 5px;
-	width: 50%;
+	width: 10%;
 	border-style: none;
 	background-color:rgba(52, 137, 165, 1);
 	color: white;
+	 
 }
 
 
@@ -145,25 +126,27 @@ input:focus{
 .hidden{
 	display: none;
 }
-.column1, .column2, .column3{
-	width: 30%;
+.column1, .column2, .column3, .column4{
+	width: 40%;
 	display: inline-block;
 	vertical-align: top;
-	height: 200px;
+	
+	margin-bottom: 50px;
 }
 .wrap {
 	height: 100%;
 	width:100%;
-	overflow-y: scroll ;
 }
+
 .drive {
 	width: 100%;
-	height: 27%;
+	height: 20%;
 	background-color: rgba(51, 51, 51, 1);
 	color: white;
-	padding: 10px;
 	font-size: 12px;
-	border-bottom: white;
+	border-bottom: 1px solid rgba(255, 255, 255, .6);
+	padding: 10px;
+  	display: none;
 	
 }
 
@@ -173,16 +156,40 @@ input:focus{
 	color: rgba(180, 217, 67, 1);
 }
 
+.drive.img{
+	display: block;
+	background-image: url('assets/teddy-bear-load.gif');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 250px;
+	
+}
+
+
+
 .title{
 	width: 100%;
 	height: 20%;
-	background-color: rgba(240, 166, 66, 1);
+	background-color: rgba(255, 105, 7, 1);
 	color: white;
-	padding: 10px;
-	text-align: center;
-	font-size: 12px;
+	padding: 5px 5px 5px 5px;
+	text-align: left;
+	font-size: 18px;
+	vertical-align: top;
+	border-radius: 3px;
+}
 
+.title span{
+	vertical-align: top;
+	font-weight: bold;
+	margin-left: 58%;
+}
 
+.title span img{
+	height: 30px;
+	width: 30px;
+	transform: rotate(90deg);
+	margin-left: 45px;
 }
 #directions{
 	height: 100%;
@@ -190,13 +197,6 @@ input:focus{
 	overflow-y: scroll ;	
 }
 
-
-
-.icon{
-	display: inline-block;
-	position: relative;
-	left: 2px;
-}
 
 .span1{
 	font-size: 20px;
@@ -222,16 +222,16 @@ input:focus{
 }
 
 
-.drive.real-time {
-	display: none;
-}
 
-.drive.real-time.active {
+
+.drive.active, .drive.active1, .drive.active2, .drive.active3{
 	display: block;
 	text-align: left;
 	height: 100%;
 	color: white;
 }
+
+
 
 
 .RD{
@@ -269,7 +269,14 @@ input:focus{
 }
 
 
+.size8{
+	font-size: 9px;
+	text-align: center;
+}
 
+.size8:hover{
+	color: rgba(83, 206, 239, 1);
+}
 
 
 

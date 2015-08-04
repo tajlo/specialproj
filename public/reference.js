@@ -3,7 +3,7 @@ var app = angular.module("RubyLineApp", [])
 
 
 // controller for google maps locator with markers & fare estimates 
-app.controller("fareEstimator", function($scope, $http){
+app.controller("fareEstimator", function($scope, $http, $interval){
    
 var styles = [
     {"featureType":"administrative.land_parcel",
@@ -86,7 +86,7 @@ var styles = [
   
 
    
-var getLocation = function(){
+/*var getLocation = function(){
   var latitude;
   var longitude;
   var styledMap = new google.maps.StyledMapType(styles,
@@ -112,13 +112,7 @@ var getLocation = function(){
             map.setMapTypeId('map_style'); 
          
           }) 
-}();
-
-
-
-
-
-
+}();*/
 
 
 $scope.address = {
@@ -130,15 +124,12 @@ $scope.people = {
    number: [2, 3 , 4, 5 ,6 , 7, 8 , 9, 10, 11 , 12]
 }
 
+$scope.showing = false
+
 var a 
 var b 
 var c
 var d
-
-
-
-
-
 var map;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
@@ -183,90 +174,120 @@ var codeAddress = function() {
 }
 
 
- $scope.calcRoute = function() {
-  
-  var directionsDisplay;
-  var directionsService = new google.maps.DirectionsService();
-    codeAddress()
+  $scope.calcRoute = function() {
+       var styledMap = new google.maps.StyledMapType(styles,
+      {name: "Styled Map"});
+      var directionsDisplay;
+      var directionsService = new google.maps.DirectionsService();
+        codeAddress()
 
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    var dc = new google.maps.LatLng(38.9047,-77.0164);
-    var mapOptions = {
-      zoom: 14,
-      center: dc
-    }
-    map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
-    directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById("directions"));
-
-          var request = {
-            origin:$scope.address.address1,
-            destination:$scope.address.address2,
-            travelMode: google.maps.TravelMode.WALKING
-          };
-          directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
-                
-                getUberdata()
-                getMetrodata()
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var dc = new google.maps.LatLng(38.9047,-77.0164);
+        var mapOptions = {
+          zoom: 14,
+          center: dc,
+          mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
             }
-          });
-}
+        }
+        map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style'); 
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById("directions"));
 
-var getUberdata = function(){
+              var request = {
+                origin:$scope.address.address1,
+                destination:$scope.address.address2,
+                travelMode: google.maps.TravelMode.WALKING
+              };
 
-var peeps = document.getElementById("people").value
-var uberReq = $http({
-          method: 'GET',
-          url: 'http://rubyline.herokuapp.com/fares/uber?lat1='+a+ '&long1=' +b+ '&lat2=' + c + '&long2=' +d+ '&riders=' + peeps , 
-      })
-
-  uberReq.then(
-    function(data){
-      $scope.ufares = data['data']['fares']
-
-      console.log(data.data.fares)
-     
+              directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) { 
+                  directionsDisplay.setDirections(response);
+                   
+                    getUberdata()
+                    getMetrodata()
 
 
+
+                }
+              });
     }
-    )
-}
 
-var getMetrodata = function(){
-  var peeps = document.getElementById("people").value
-  var mtrReq = $http({
-            method: 'GET',
-            url: 'http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+d+ '&riders=' + peeps, 
-          
-        })
+  var getUberdata = function(){
+    
+      var peeps = document.getElementById("people").value
+      var uberReq = $http.get('http://rubyline.herokuapp.com/fares/uber?lat1='+a+ '&long1=' +b+ '&lat2=' + c + '&long2=' +d+ '&riders=' + peeps)
+              
 
-  mtrReq.then(
-    function(data){
-      $scope.mfares = data['data']['fares']
+        uberReq.then(
+          function(data){
+           
+            $scope.ufares = data['data']['fares']
 
-      console.log(data.data.fares)
-    })
+            console.log(data.data.fares)
+           
+          })
+        .finally(function () {
+      // Hide loading spinner whether our call succeeded or failed.
+      $scope.loading = false;
+       $scope.showing = true;
+        });
 
-  
-  var metroReq = {
-      method: 'GET',
-      url: 'http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b ,
-     
+        var bikeReq = $http.get('http://rubyline.herokuapp.com/estimates/bike?lat='+a+'&long='+b)
+           
+          bikeReq.then(
+            function(data){
+
       
+                $scope.bikestation = data.data.locations
+                console.log(data.data.locations)
+
+          }).finally(function () {
+            // Hide loading spinner whether our call succeeded or failed.
+            $scope.loading = false;
+          });  
+
+
   }
 
-  $http(metroReq)
-  .then(
-    function(data){
-      $scope.metrostation = data.data.locations[0]
-      console.log(data.data.locations)
-})
-  
+  var getMetrodata = function(){
+    
+    var peeps = document.getElementById("people").value
+    var mtrReq = $http.get('http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+d+ '&riders=' + peeps) 
+            
 
-}
+    mtrReq.then(
+      function(data){
+      
+        $scope.mfares = data['data']['fares']
+
+        console.log(data.data.fares)
+      }).finally(function () {
+      // Hide loading spinner whether our call succeeded or failed.
+
+
+      $scope.loading = false;
+      });
+
+    
+    var metroReq = $http.get('http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b)
+     metroReq.then(
+      function(data){
+        
+        $scope.metrostation = data.data.locations[0]
+        console.log(data.data.locations)
+     })
+     .finally(function () {
+      // Hide loading spinner whether our call succeeded or failed.
+      $scope.loading = false;
+    });  
+  }
   
+   var getBikeStation = function() {
+         
+  }
 
 });
 
@@ -316,25 +337,6 @@ var getMetrodata = function(){
        }
 
       
-
-      var getMetroStation = function(){
-        var metroReq = {
-            method: 'GET',
-            url: 'http://rubyline.herokuapp.com/estimates/train?',
-            data: {
-              lat: latitude,
-              long: longitude
-            }
-            
-        }
-
-        $http(metroReq)
-        .success(
-          function(data){
-            $scope.metrostation = data.locations
-      }
-    )
-    }
 
          
       

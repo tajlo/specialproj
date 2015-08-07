@@ -86,7 +86,7 @@ var styles = [
   
 
    
-/*var getLocation = function(){
+var getLocation = function(){
   var latitude;
   var longitude;
   var styledMap = new google.maps.StyledMapType(styles,
@@ -112,7 +112,8 @@ var styles = [
             map.setMapTypeId('map_style'); 
          
           }) 
-}();*/
+}();
+
 
 
 $scope.address = {
@@ -125,6 +126,8 @@ $scope.people = {
 }
 
 $scope.showing = false
+$scope.clicked = false
+
 
 var a 
 var b 
@@ -136,7 +139,7 @@ var directionsService = new google.maps.DirectionsService();
   
 var codeAddress = function() {
  
-  
+
     var mapOptions = {
       zoom: 14,
       
@@ -175,6 +178,8 @@ var codeAddress = function() {
 
 
   $scope.calcRoute = function() {
+      $scope.peeps = document.getElementById('people').value 
+     
        var styledMap = new google.maps.StyledMapType(styles,
       {name: "Styled Map"});
       var directionsDisplay;
@@ -194,23 +199,21 @@ var codeAddress = function() {
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style'); 
             directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById("directions"));
+            directionsDisplay.setPanel(document.getElementById("walking-direct"));
 
-              var request = {
+              var request1 = {
                 origin:$scope.address.address1,
                 destination:$scope.address.address2,
                 travelMode: google.maps.TravelMode.WALKING
               };
 
-              directionsService.route(request, function(response, status) {
+              directionsService.route(request1, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) { 
                   directionsDisplay.setDirections(response);
                    
                     getUberdata()
                     getMetrodata()
-
-
-
+                   // getWalk()
                 }
               });
     }
@@ -285,9 +288,16 @@ var codeAddress = function() {
     });  
   }
   
-   var getBikeStation = function() {
-         
-  }
+   /*var getWalk = function() {
+       var googleWalkReq =  $http.get('http://maps.googleapis.com/maps/api/directions/json?origin='+ $scope.address.address1 +'&destination='+$scope.address.address2 +'&key=AIzaSyCSOpI_9HnYRWB_-zuUNUz8_Dv9Y0zc0zU')
+       
+
+          
+        googleWalkReq.then(
+          function(data){
+            console.log(data.routes.legs.duration)
+          })
+  }*/
 
 });
 

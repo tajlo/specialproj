@@ -35,7 +35,7 @@
                     <div class="title" ng-click="viewType = 'show'">Uber
                         <span ng-model="ufares" 
                               ng-show="showing"> 
-                             {{ ufares[0].duration}} min <img src="assets/blackarrow.png">
+                             {{ ufares[0].duration}} min - {{ufares[0].total_estimate}} <img src="assets/blackarrow.png">
                         </span>
                     </div>
                     <div class="wrap">
@@ -54,7 +54,7 @@
                     <div class="title" ng-click="viewType = 'show1'">Metro 
                         <span ng-model="mfares" 
                               ng-show="showing"> 
-                             {{ mfares[0].duration}} min <img src="assets/blackarrow.png">
+                             {{ mfares[0].duration}} min - ${{mfares[0].total_fare}}0 <img src="assets/blackarrow.png">
                         </span>
                     </div>
                     <div class="wrap" >
@@ -63,7 +63,7 @@
                       <div class="drive" 
                             ng-class="{ active: viewType === 'show1' }"
                             ng-repeat="fare in mfares" >
-                        <span class="span1" ng-model="metrostation">{{metrostation.name}} </span> <span class="span2">${{fare.total_fare}} total</span>
+                        <span class="span1" ng-model="metrostation">{{metrostation.name}} </span> <span class="span2">${{fare.total_fare}}0 total</span>
                         </br>
                         <span class="span3">{{ fare.duration}}min </span> <span class="span4"> ( ${{fare.single_fare}} /pp ) </span> 
                           </br>
@@ -79,22 +79,23 @@
                   </div> 
                   <div class="column3">
                           <div class="title" ng-click="viewType = 'show2'">Walk
-                               <span ng-model="mfares" 
+                               <span 
                               ng-show="showing"> 
-                             {{ mfares[0].duration}} min <img src="assets/blackarrow.png">
+                             Click for Time - Free <img src="assets/blackarrow.png">
                         </span>
 
                           </div>
                           <div class="wrap" ng-show="viewType === 'show2'" >
-                            <div id="google-map" ></div> 
-                            <div id="directions" ></div>
+                             <div id="directions" ></div>
+                             <div id="google-map" ></div> 
+                           
                           </div>
                   </div>
                     <div class ="column4">
                       <div class="title"  ng-click="viewType = 'show3'">Bike
                            <span ng-model="mfares" 
                               ng-show="showing"> 
-                             {{ mfares[0].duration}} min <img src="assets/blackarrow.png">
+                            <img src="assets/blackarrow.png">
                         </span>
                       </div>
                       <div class="wrap">
@@ -125,7 +126,7 @@
   <script src="libs/angular.js"></script>
   <script src="libs/underscore.js"></script>
   <script src="libs/jquery.js"></script>
-  <script src="reference.js"></script>
+  
 
 </body>
 </html>

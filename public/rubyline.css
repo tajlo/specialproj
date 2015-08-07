@@ -188,14 +188,14 @@ input:focus{
 .title span{
 	vertical-align: top;
 	font-weight: bold;
-	margin-left: 58%;
+	margin-left: 20%;
 }
 
 .title span img{
 	height: 30px;
 	width: 30px;
 	transform: rotate(90deg);
-	margin-left: 45px;
+	margin-left: 30px;
 }
 #directions{
 	height: 100%;

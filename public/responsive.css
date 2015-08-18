@@ -1,0 +1,90 @@
+@media only screen and (max-width: 1200px) and (min-width: 1025px) {
+	#google-map{
+	height: 400px;
+	width: 500px;
+	position: relative;
+	left: 10%;}
+
+}
+
+/*IPAD*/
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+	#google-map{
+	height: 350px;
+	width: 425px;
+	position: relative;
+	float: left;}
+
+	.data{
+	left: 10%;}
+
+}
+
+@media only screen and (max-width: 767px) and (min-width: 641px)  {
+	#google-map{
+	height: 250px;
+	width: 350px;
+	position: relative;
+	float: left;}
+
+	.data{
+	left: 10%;}
+}
+
+@media only screen and (max-width: 640px) and (min-width: 461px)  {
+	.search-data{
+		width: 95%;
+		text-align: center;
+		margin-top: 40px;}
+
+	.map, .data{
+		display: block;
+		width: 100%;}
+
+	.map {
+		margin-top: 40px;}
+
+	.data{
+		margin-top: 2%;
+		left: 5%;}
+
+	#google-map{
+		height: 350px;
+		width: 450px;
+		left: 5%;}
+
+	.arrow{
+		width: 45%;}
+
+	input {
+		width: 90%;}
+}
+
+@media only screen and (max-width: 460px) and (min-width: 320px)  {
+	
+	.search-data{
+		width: 95%;
+		text-align: center;
+		margin-top: 40px;}
+
+	.map, .data{
+		display: block;
+		width: 100%;}
+
+	.map {
+		margin-top: 30px;}
+
+	#google-map{
+		height: 250px;
+		width: 320px;
+		text-align: center;
+		margin-bottom: 20px;}
+
+	.arrow{
+		width: 40%;
+	}
+
+	input {
+		width: 90%;
+	}
+}

@@ -4,7 +4,9 @@ var app = angular.module("RubyLineApp", [])
 
 // controller for google maps locator with markers & fare estimates 
 app.controller("fareEstimator", function($scope, $http, $interval){
-   
+  
+
+
 var styles = [
     {"featureType":"administrative.land_parcel",
      "elementType":"all",
@@ -127,6 +129,7 @@ $scope.people = {
 
 $scope.showing = false
 $scope.clicked = false
+$scope.viewType = 'none'
 
 
 var a 
@@ -168,6 +171,7 @@ var codeAddress = function() {
             c = results[0].geometry.location['G']
             d = results[0].geometry.location['K']
 
+
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
@@ -207,13 +211,29 @@ var codeAddress = function() {
                 travelMode: google.maps.TravelMode.WALKING
               };
 
+              var request2 = {
+                origin:$scope.address.address1,
+                destination:$scope.address.address2,
+                travelMode: google.maps.TravelMode.BICYCLING
+              };
+
+              directionsService.route(request2, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) { 
+                  console.log(response.routes[0])
+                 $scope.bikeduration = response.routes[0].legs[0].duration.text
+             
+                }
+              });
+
               directionsService.route(request1, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) { 
                   directionsDisplay.setDirections(response);
-                   
-                    getUberdata()
-                    getMetrodata()
-                   // getWalk()
+                  console.log(response.routes[0])
+                 $scope.duration = response.routes[0].legs[0].duration.text
+                 
+                    $interval(60000, getMetrodata())
+                    $interval(60000, getUberdata()) 
+             
                 }
               });
     }
@@ -225,17 +245,13 @@ var codeAddress = function() {
               
 
         uberReq.then(
-          function(data){
-           
+          function(data){ 
             $scope.ufares = data['data']['fares']
-
             console.log(data.data.fares)
-           
           })
         .finally(function () {
-      // Hide loading spinner whether our call succeeded or failed.
-      $scope.loading = false;
-       $scope.showing = true;
+           $scope.loading = false;
+           $scope.showing = true;
         });
 
         var bikeReq = $http.get('http://rubyline.herokuapp.com/estimates/bike?lat='+a+'&long='+b)
@@ -248,7 +264,6 @@ var codeAddress = function() {
                 console.log(data.data.locations)
 
           }).finally(function () {
-            // Hide loading spinner whether our call succeeded or failed.
             $scope.loading = false;
           });  
 
@@ -263,98 +278,33 @@ var codeAddress = function() {
 
     mtrReq.then(
       function(data){
-      
+        
         $scope.mfares = data['data']['fares']
-
+        $scope.mfares[0].total_fare = (data.data.fares[0].total_fare).toFixed(2)
         console.log(data.data.fares)
+
       }).finally(function () {
-      // Hide loading spinner whether our call succeeded or failed.
-
-
-      $scope.loading = false;
+        $scope.loading = false;
       });
 
     
     var metroReq = $http.get('http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b)
      metroReq.then(
       function(data){
-        
         $scope.metrostation = data.data.locations[0]
         console.log(data.data.locations)
      })
      .finally(function () {
-      // Hide loading spinner whether our call succeeded or failed.
       $scope.loading = false;
     });  
   }
   
-   /*var getWalk = function() {
-       var googleWalkReq =  $http.get('http://maps.googleapis.com/maps/api/directions/json?origin='+ $scope.address.address1 +'&destination='+$scope.address.address2 +'&key=AIzaSyCSOpI_9HnYRWB_-zuUNUz8_Dv9Y0zc0zU')
-       
-
-          
-        googleWalkReq.then(
-          function(data){
-            console.log(data.routes.legs.duration)
-          })
-  }*/
+   
 
 });
 
 
 
- // controller to "get" nearest metro and bikeshare stations
-/*app.controller("nearestStation", function($scope, $http, $interval){
 
-     var latitude;
-     var longitude;
-
-        navigator.geolocation.getCurrentPosition(function(position){
-            console.log("position", position)
-
-            latitude = position.coords.latitude
-            longitude = position.coords.longitude
-
-
-         $interval(60000, getMetroStation(latitude, longitude))
-         $interval(60000, getBikeStation(latitude, longitude))
-        })
-      
-  
-      var getBikeStation = function() {
-         var bikeReq = {
-             method: 'GET',
-             url: 'http://rubyline.herokuapp.com/estimates/bike?',
-             data:{
-              lat: latitude,
-              long: longitude
-             }   
-            
-        }
-
-         $http(bikeReq)
-          .success(
-          function(data){
-
-            $scope.bikestation = []
-            
-
-            $scope.bikestation = data.locations
-            console.log($scope.bikestation)
-
-          }
-        )
-       }
-
-      
-
-         
-      
-      
-
-
-
-})
-*/
 
 

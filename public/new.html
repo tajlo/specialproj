@@ -4,18 +4,19 @@
 	<title> Navigate DC</title>
 	<link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 	 <link rel="stylesheet" type="text/css" href="new.css">
+	 <link rel="stylesheet" type="text/css" href="responsive.css">
 </head>
 <body>
   <div class="container" ng-controller="fareEstimator">
 	<div class="header">
 	<img src="assets/dc.png"/> NAVIGATE DC 
-	</div>
+  </div>
 
 	<div class="search-bar">
 		<input type="text" ng-model="address.address1" placeholder="start" />
 		<input type="text" ng-model="address.address2" placeholder="end"/>
 		<select id="people" placeholder="ppl" >
-	        <option disabled="people">people </option>      
+	        <option disabled="people" selected=''>people </option>      
 	        <option ng-repeat=" numbers in people.number">{{numbers}}</option>
 	    </select>
 	    <button ng-click="calcRoute() ; loading = 'true'; clicked = 'true' ; timing ='true' ">Go!</button>
@@ -32,17 +33,17 @@
 	<div class="data">
 		<div class="sortby"> Show Best: <button id="time" ng-click="timing = 'true'" ng-class="{active: timing === 'true'}">Time</button> <button id="fare" ng-click="timing = 'false'" ng-class="{active1: timing === 'false'}">Fare</button></div>
 		<div class="column1">
-			<div class="title" ng-dblclick="viewType = none" ng-click="viewType = 'show'"> <img src="assets/driving.png"/> UBER </div><div class="arrow" ng-dblclick="viewType = none" ng-model="ufares" ng-click="viewType = 'show'" ><div ng-show="showing"><div ng-show="timing === 'true'"> {{ ufares[0].duration}} min</div><div ng-show="timing === 'false'"> {{ufares[0].total_estimate}} total</div> <img src="assets/arrow.png"/></div></div>
+			<div class="title" ng-click="viewType  = 'show'"> <img src="assets/driving.png"/> UBER </div><div class="arrow"  ng-model="ufares" ng-click="viewType = 'show'" ><div ng-show="showing"><div ng-show="timing === 'true'"> {{ ufares[0].duration}} mins</div><div ng-show="timing === 'false'"> {{ufares[0].total_estimate}} total</div> <img src="assets/white-arrow.png"/></div></div>
 			<div class="mini-data"
 			 	ng-show="viewType === 'show'"
                 ng-repeat="fare in ufares">
 				<span class="span1">{{fare.type}}</span><span class="span2">{{fare.total_estimate}} total</span></br>
-                <span class="span3">{{fare.duration}} min</span><span class="span4">( ${{fare.low_per_person}} - {{fare.high_per_person}} /pp )</span>
+                <span class="span3">{{fare.duration}} mins</span><span class="span4">( ${{fare.low_per_person}} - {{fare.high_per_person}} /pp )</span>
 			</div>
 		</div>
 
 		<div class="column2">
-			<div class="title" ng-dblclick="viewType = none" ng-click="viewType = 'show1'"> <img src="assets/metroing.png"/> METRO </div><div class="arrow" ng-dblclick="viewType = none" ng-model="mfares"><div ng-show="showing" ng-click="viewType = 'show1'"><div ng-show="timing === 'true'"> {{ mfares[0].duration}} min </div><div ng-show="timing === 'false'"> ${{mfares[0].total_fare}} total</div> <img src="assets/arrow.png"/></div></div>
+			<div class="title" ng-click="viewType = 'show1'"> <img src="assets/metroing.png"/> METRO </div><div class="arrow" ng-model="mfares"><div ng-show="showing" ng-click="viewType = 'show1'"><div ng-show="timing === 'true'"> {{ mfares[0].duration}} mins </div><div ng-show="timing === 'false'"> ${{mfares[0].total_fare}} total</div> <img src="assets/white-arrow.png"/></div></div>
 			<div class="mini-data 1" ng-show="viewType === 'show1'" ng-repeat="fare in mfares">
 				<span class="span1" ng-model="metrostation">{{metrostation.name}}</span><span class="span2">${{fare.total_fare}} total</span></br>
                 <span class="span3">{{ fare.duration}}min</span><span class="span4">( ${{fare.single_fare}} /pp ) </span>
@@ -57,14 +58,14 @@
 		</div>
 
 		<div class="column3">
-			<div class="title" ng-dblclick="viewType = none" ng-click="viewType = 'show2'">  <img src="assets/walking.png"/>WALK</div><div class="arrow" ng-dblclick="viewType = none" ng-click="viewType = 'show2'"><span ng-show="showing"><div ng-show="timing === 'true'">22 min</div><div ng-show="timing === 'false'">Free</div><img src="assets/arrow.png"/></span></div>
+			<div class="title" ng-click="viewType = 'show2'">  <img src="assets/walking.png"/>WALK</div><div class="arrow" ng-click="viewType = 'show2'"><span ng-show="showing"><div ng-show="timing === 'true'">{{duration}}</div><div ng-show="timing === 'false'">Free</div> <img src="assets/white-arrow.png"/></span></div>
 			<div class="mini-data" ng-show="viewType === 'show2'">
 				<div id="walking-direct"></div>
 			</div>
 		</div>
 
 		<div class="column4">
-			<div class="title" ng-dblclick="viewType = none" ng-click="viewType = 'show3'"> <img src="assets/bicycle.png"/> BIKE </div><div class="arrow" ng-dblclick="viewType = none" ng-click="viewType = 'show3'"><span ng-show="showing"><div ng-show="timing === 'true'">11 min</div><div ng-show="timing === 'false'">Free</div> <img src="assets/arrow.png"/></span></div>
+			<div class="title" ng-click="viewType = 'show3'"> <img src="assets/bicycle.png"/> BIKE </div><div class="arrow" ng-click="viewType = 'show3'"><span ng-show="showing"><div ng-show="timing === 'true'">{{bikeduration}}</div><div ng-show="timing === 'false'">Free</div> <img src="assets/white-arrow.png"/></span></div>
 			<div class="mini-data"  ng-show="viewType === 'show3'" ng-repeat="bikes in bikestation">
 				<span class="span1">{{bikes.name}}</span><span class="span2">Members: Free</span></br>
                 <span class="span3">{{bikes.bikes_available}} bikes {{bikes.docks_available}} docks</span><span class="span4">(Non Members: $7/30min )</span>

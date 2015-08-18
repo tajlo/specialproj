@@ -241,7 +241,7 @@ var codeAddress = function() {
   var getUberdata = function(){
     
       var peeps = document.getElementById("people").value
-      var uberReq = $http.get('http://rubyline.herokuapp.com/fares/uber?lat1='+a+ '&long1=' +b+ '&lat2=' + c + '&long2=' +d+ '&riders=' + peeps)
+      //var uberReq = $http.get('http://rubyline.herokuapp.com/fares/uber?lat1='+a+ '&long1=' +b+ '&lat2=' + c + '&long2=' +d+ '&riders=' + peeps)
               
 
         uberReq.then(
@@ -254,7 +254,7 @@ var codeAddress = function() {
            $scope.showing = true;
         });
 
-        var bikeReq = $http.get('http://rubyline.herokuapp.com/estimates/bike?lat='+a+'&long='+b)
+        //var bikeReq = $http.get('http://rubyline.herokuapp.com/estimates/bike?lat='+a+'&long='+b)
            
           bikeReq.then(
             function(data){
@@ -273,7 +273,7 @@ var codeAddress = function() {
   var getMetrodata = function(){
     
     var peeps = document.getElementById("people").value
-    var mtrReq = $http.get('http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+d+ '&riders=' + peeps) 
+   // var mtrReq = $http.get('http://rubyline.herokuapp.com/fares/train?lat1='+a+'&long1=' +b+ '&lat2=' +c+ '&long2='+d+ '&riders=' + peeps) 
             
 
     mtrReq.then(
@@ -288,7 +288,7 @@ var codeAddress = function() {
       });
 
     
-    var metroReq = $http.get('http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b)
+   // var metroReq = $http.get('http://rubyline.herokuapp.com/estimates/train?lat='+a+'&long='+b)
      metroReq.then(
       function(data){
         $scope.metrostation = data.data.locations[0]

@@ -2,12 +2,13 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
+	font-family: 'Quicksand';
 }
 
 .container{
 	background-color: rgba(28, 39, 59, 1);
 	height: 200vh;
-	font-family: 'Quicksand';
+	
 }
 
 /*Layout Structure*/
@@ -111,6 +112,7 @@ button{
 	border: 2px solid rgba(63, 156, 186, 1) ;
 	border-radius: 5px;
 	margin-left: 1%;
+	cursor: pointer;
 }
 
 
@@ -159,6 +161,7 @@ button{
 	display: inline-block;
 	width: 45%;
 	vertical-align: top;
+	cursor: pointer;
 
 }
 

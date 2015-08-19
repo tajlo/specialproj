@@ -16,7 +16,7 @@
 		<input type="text" ng-model="address.address1" placeholder="start" />
 		<input type="text" ng-model="address.address2" placeholder="end"/>
 		<select id="people" placeholder="ppl" >
-	        <option disabled="people" selected=''>people </option>      
+	        <option disabled="people" selected=''>People </option>      
 	        <option ng-repeat=" numbers in people.number">{{numbers}}</option>
 	    </select>
 	    <button ng-click="calcRoute() ; loading = 'true'; clicked = 'true' ; timing ='true' ">Go!</button>

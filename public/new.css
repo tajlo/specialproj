@@ -2,12 +2,13 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
-	font-family: 'Quicksand';
+	
 }
 
 .container{
 	background-color: rgba(28, 39, 59, 1);
 	height: 200vh;
+	font-family: 'Quicksand';
 	
 }
 
@@ -15,18 +16,20 @@
 .header {
 	height: 12vh;
 	margin-bottom: 1%;
+	font-family: 'Quicksand';
 }
 
 .search-bar{
 	height: 10vh;
 	text-align: center;
 	margin-bottom: 1%;
-	
+	font-family: 'Quicksand';
 }
  .search-data{
  	height: 5vh;
  	text-align: center;
 	margin-bottom: 1%;
+	font-family: 'Quicksand';
 
  }
 .map, .data{
@@ -50,6 +53,7 @@
 	color:white ;
 	position: relative;
 	left: 7%;
+	font-family: 'Quicksand';
 }
 
 .footer{
@@ -58,11 +62,12 @@
 	margin-top: 2%;
 	text-align: center;
 	font-size: 11px;
+	font-family: 'Quicksand';
 }
 
 /*Header*/
 .header{
-
+	font-family: 'Quicksand';
 	font-weight: 400;
 	font-size: 36px;
 	padding-left: 2%;
@@ -78,6 +83,7 @@
 }
 /*Search Bar & Search Data*/
 .search-data{
+	font-family: 'Quicksand';
 	color: white;
 }
 
@@ -88,6 +94,7 @@
 }
 
 input {
+	font-family: 'Quicksand';
 	height: 24px;
 	padding: 5px;
 	border: none;
@@ -106,6 +113,7 @@ input:focus , button:focus{
 }
 
 button{
+	font-family: 'Quicksand';
 	background-color: rgba(28, 39, 59, 1);
 	padding: 5px 10px;
 	color: white;
@@ -117,28 +125,33 @@ button{
 
 
 .active1, .active {
+	font-family: 'Quicksand';
 	background-color: rgba(63, 156, 186, 1);
 }
 
 /* API Compare Data */
 .sortby {
+	font-family: 'Quicksand';
 	margin-bottom: 1%;
 	font-size: 12px;
 }
 
 #time{
+	font-family: 'Quicksand';
 	padding: 0px 5px ;
 	font-size: 10px;
 	border: 2px solid rgba(63, 156, 186, 1) ;
 }
 
 #fare{
+	font-family: 'Quicksand';
 	padding: 0px 5px ;
 	font-size: 10px;
 	border: 2px solid rgba(63, 156, 186, 1) ;
 }
 
 #time.active , #fare.active {
+	font-family: 'Quicksand';
 	background-color: rgba(63, 156, 186, 1) ;
 	color: white;
 }
@@ -148,11 +161,12 @@ button{
 }
 
 .column1, .column2, .column3, .column4{
+	font-family: 'Quicksand';
 	width: 100%;
 	margin-bottom: .5%;
 }
 .title, .arrow{
-	
+	font-family: 'Quicksand';
 	font-size: 18px;
 	height: 5vh;
 	color: rgba(50, 50, 51, 1);
@@ -192,6 +206,7 @@ button{
 }
 
 .mini-data{
+	font-family: 'Quicksand';
 	height: 20%;
 	width: 90%;
 	color: white;

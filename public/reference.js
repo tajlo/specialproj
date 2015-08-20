@@ -123,6 +123,9 @@ $scope.address = {
     address2: ''
 }
 
+$scope.start = ''
+$scope.finish = ''
+
 $scope.people = {
    number: [1, 2, 3 , 4, 5 ,6 , 7, 8 , 9, 10, 11 , 12]
 }
@@ -141,8 +144,6 @@ var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
   
 var codeAddress = function() {
-  $scope.address.address1 = $scope.start 
-  $scope.address.address2 = $scope.finish
 
     var mapOptions = {
       zoom: 14,
@@ -298,6 +299,8 @@ var codeAddress = function() {
      })
      .finally(function () {
       $scope.loading = false;
+      $scope.address.address1 = $scope.start 
+      $scope.address.address2 = $scope.finish
       $scope.address.address1 = ''
       $scope.address.address2 = ''
     });  

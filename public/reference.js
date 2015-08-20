@@ -123,8 +123,8 @@ $scope.address = {
     address2: ''
 }
 
-$scope.start = ''
-$scope.finish = ''
+$scope.start = $scope.address.address1
+$scope.finish = $scope.address.address2
 
 $scope.people = {
    number: [1, 2, 3 , 4, 5 ,6 , 7, 8 , 9, 10, 11 , 12]

@@ -297,6 +297,8 @@ var codeAddress = function() {
      })
      .finally(function () {
       $scope.loading = false;
+      $scope.address.address1 = ''
+      $scope.address.address2 = ''
     });  
   }
   

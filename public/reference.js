@@ -281,6 +281,7 @@ var codeAddress = function() {
         
         $scope.mfares = data['data']['fares']
         $scope.mfares[0].total_fare = (data.data.fares[0].total_fare).toFixed(2)
+        $scope.mfares[0].single_fare = (data.data.fares[0].single_fare).toFixed(2)
         console.log(data.data.fares)
 
       }).finally(function () {

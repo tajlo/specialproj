@@ -123,8 +123,8 @@ $scope.address = {
     address2: ''
 }
 
-$scope.start = $scope.address.address1
-$scope.finish = $scope.address.address2
+
+
 
 $scope.people = {
    number: [1, 2, 3 , 4, 5 ,6 , 7, 8 , 9, 10, 11 , 12]
@@ -155,7 +155,7 @@ var codeAddress = function() {
 
     geocoder.geocode( { 'address': $scope.address.address1}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-
+        $scope.start = $scope.address.address1
         a = results[0].geometry.location['G']
         b = results[0].geometry.location['K']
 
@@ -169,7 +169,7 @@ var codeAddress = function() {
 
     geocoder.geocode( { 'address': $scope.address.address2}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-
+            $scope.finish = $scope.address.address2
             c = results[0].geometry.location['G']
             d = results[0].geometry.location['K']
 

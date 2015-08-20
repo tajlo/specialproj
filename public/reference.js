@@ -141,7 +141,8 @@ var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
   
 var codeAddress = function() {
- 
+  $scope.address.address1 = $scope.start 
+  $scope.address.address2 = $scope.finish
 
     var mapOptions = {
       zoom: 14,

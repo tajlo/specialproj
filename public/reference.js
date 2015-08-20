@@ -299,8 +299,7 @@ var codeAddress = function() {
      })
      .finally(function () {
       $scope.loading = false;
-      $scope.address.address1 = $scope.start 
-      $scope.address.address2 = $scope.finish
+      
       $scope.address.address1 = ''
       $scope.address.address2 = ''
     });  
